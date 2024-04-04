@@ -7,20 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func CookieWrap() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		if cookie, err := c.Cookie("key"); err == nil {
-			if cookie == "value" {
-				c.Next()
-				return
-			}
-		}
-
-		c.JSON(http.StatusForbidden, gin.H{"error": "you smell :("})
-		c.Abort()
-	}
-}
-
 func main() {
 	router := gin.Default()
 	router.LoadHTMLFiles("./templates/dir.html", "./templates/file.html")
